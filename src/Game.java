@@ -275,7 +275,10 @@ public class Game
         {
             sizeOK = false;
         }
-
+        if(!sizeOK)
+        {
+            System.out.println("Sorry! " + getPlayerName() + " Lose!");
+        }
         if (sizeOK && tempGameTotal == tempWinTotal)
         {
             System.out.println("Congratulations! " + getPlayerName() + " Win!");
