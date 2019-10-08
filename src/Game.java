@@ -1,19 +1,19 @@
+//file IO WIP, multipleList selection WIP, hard level selection WIP, Help() WIP
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game
 {
     private String playerName;
     private int gameTotal;
-
+    private ArrayList<Buffer> multipleList;
 
     public Game()
     {
         playerName = "";
         gameTotal = 0;
-
+        multipleList = new ArrayList<Buffer>();
     }
-
-
 
     public void setGameTotal(int gameTotal)
     {
@@ -23,6 +23,11 @@ public class Game
     public void setPlayerName(String playerName)
     {
         this.playerName = playerName;
+    }
+
+    public void setMultipleList(ArrayList<Buffer> multipleList)
+    {
+        this.multipleList = multipleList;
     }
 
     public int getGameTotal()
@@ -35,7 +40,10 @@ public class Game
         return playerName;
     }
 
-
+    public ArrayList<Buffer> getMultipleList()
+    {
+        return multipleList;
+    }
 
     public String nameAssign()
     {
@@ -65,7 +73,7 @@ public class Game
         while (!option.equals("4"))//this loop keeps game running until player pressed 2
         {
             displayMenu();
-            System.out.println("Please Choose Your Option:");
+            System.out.println("Please Choose Your Option: ");
             Scanner scanner = new Scanner(System.in);
             option = scanner.nextLine().trim();//receiving option from the player
             switch (option)
@@ -77,16 +85,13 @@ public class Game
                 case "2":
                     if (isPlayerRegistered)//check flag
                     {
+                        int gameWinTotal = gameWinTotalAssign();
                         Buffer leftBuffer = new Buffer();
                         Buffer rightBuffer = new Buffer();
-                        Buffer multipleBuffer = new Buffer();
                         leftBuffer.setMaxElements(5);
                         rightBuffer.setMaxElements(3);
-                        multipleBuffer.setMaxElements(3);
-                        multipleBuffer.setMultiple(multipleBuffer.multipleAdd(2, 4, 8));
                         RNG rng = new RNG(0, 2);
                         int index = rng.generateNumber();
-                        setGameTotal(multipleBuffer.getMultiple().get(index).getValue());
 
 
 
@@ -95,9 +100,42 @@ public class Game
 
 
 
+                        setGameTotal(multipleList.get(0).getList().get(index).getValue());
 
 
 
+
+
+
+
+
+                        do
+                        {
+                            displayNow(leftBuffer.getList(), gameTotal, rightBuffer.getList());
+                            actionDisplay();
+                            Scanner s = new Scanner(System.in);
+                            String choice = s.nextLine().trim();//receiving option from the player
+                            switch (choice)
+                            {
+                                case "1":
+                                    mergeLeft(leftBuffer.getList());
+                                    break;
+                                case "2":
+                                    mergeRight(rightBuffer.getList());
+                                    break;
+                                case "3":
+                                    splitLeft(leftBuffer.getList());
+                                    break;
+                                case "4":
+                                    splitRight(rightBuffer.getList());
+                                    break;
+                                default:
+                                    System.out.println("Please input a valid option!");
+                                    break;
+                            }
+                        }while(gameTotal < gameWinTotal);
+                        judgeWin(leftBuffer, rightBuffer, leftBuffer.getList(), rightBuffer.getList(), gameTotal, gameWinTotal);
+                        isPlayerRegistered = false;//flag set to false, in order to start a fresh new game
                     } else
                     {
                         System.out.println("Please Assign Your Name Before Playing...");//if player not registered then ask to input name
@@ -117,6 +155,13 @@ public class Game
         }
     }
 
+    private void actionDisplay()
+    {
+        System.out.println("Press 1 to merge left.");
+        System.out.println("Press 2 to merge right.");
+        System.out.println("Press 3 to split left.");
+        System.out.println("Press 4 to split right.");
+    }
 
 
     /**
@@ -149,17 +194,95 @@ public class Game
         System.out.println("");
         System.out.println("-----------------------------HELP MENU-----------------------------");
         System.out.println("===================================================================");
-        System.out.println("Option 1 is to start a new name");
-        System.out.println("OTHERWISE, THE GAME WON'T START AUTOMATICALLY FOR YOU");
-        System.out.println("*******************************************************************");
-        System.out.println("Option 2 is to display the help menu");
-        System.out.println("THIS IS WHAT YOU ARE READING NOW ^-^");
-        System.out.println("*******************************************************************");
-        System.out.println("Option 3 is to exit the game");
-        System.out.println("Good Bye!");
+
+
+
         System.out.println("===================================================================");
         System.out.println("");
     }
 
+    public int gameWinTotalAssign()
+    {
+        int userGameTotal = 0;
+        Scanner s = new Scanner(System.in);
+        s.nextInt();
+        s.nextLine();
+        System.out.println("Please set the game total you want reach: ");
+        userGameTotal = s.nextInt();
+        return userGameTotal;
+    }
+
+    public int mergeLeft (ArrayList<Multiple> tempLeftBuffer)
+    {
+        for (int i = 0; i < tempLeftBuffer.size(); i++)
+        {
+            if (gameTotal == tempLeftBuffer.get(i).getValue())
+            {
+                gameTotal = gameTotal*2;
+                tempLeftBuffer.remove(i);
+            }
+        }
+        return gameTotal;
+    }
+
+    public int mergeRight (ArrayList<Multiple> tempRightBuffer)
+    {
+        for (int i = 0; i < tempRightBuffer.size(); i++)
+        {
+            if (gameTotal == tempRightBuffer.get(i).getValue())
+            {
+                gameTotal = gameTotal*2;
+                tempRightBuffer.remove(i);
+            }
+        }
+        return gameTotal;
+    }
+
+    public int splitLeft (ArrayList<Multiple> tempLeftBuffer)
+    {
+
+        return gameTotal;
+    }
+
+    public int splitRight (ArrayList<Multiple> tempLeftBuffer)
+    {
+
+        return gameTotal;
+    }
+
+    public void displayNow(ArrayList<Multiple> tempLeftBuffer, int readGameTotal, ArrayList<Multiple> tempRightBuffer)
+    {
+        for(Multiple s : tempLeftBuffer)
+        {
+            System.out.println(s);
+        }
+
+        System.out.println(readGameTotal);
+
+        for(Multiple s : tempRightBuffer)
+        {
+            System.out.println(s);
+        }
+    }
+
+    public void judgeWin(Buffer tempLeftBuffer, Buffer tempRightBuffer, ArrayList<Multiple> tempLeftArray, ArrayList<Multiple> tempRightArray, int tempGameTotal, int tempWinTotal)
+    {
+        boolean sizeOK = false;
+        if(tempLeftArray.size() <  tempLeftBuffer.getMaxElements() && tempRightArray.size() <  tempRightBuffer.getMaxElements())
+        {
+            sizeOK = true;
+        } else
+        {
+            sizeOK = false;
+        }
+
+        if (sizeOK && tempGameTotal == tempWinTotal)
+        {
+            System.out.println("Congratulations! " + getPlayerName() + " Win!");
+        } else
+        {
+            System.out.println(getPlayerName() + " Lose, Better Next Time...");
+        }
+    }
 }
 

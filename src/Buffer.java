@@ -3,18 +3,18 @@ import java.util.ArrayList;
 public class Buffer
 {
     private int maxElements;
-    private ArrayList<Multiple> multiple;
+    private ArrayList<Multiple> list;
 
     public Buffer()
     {
         maxElements = 0;
-        multiple = new ArrayList<Multiple>();
+        list = new ArrayList<Multiple>();
     }
 
-    public Buffer(int maxElements, ArrayList<Multiple> multiple)
+    public Buffer(int maxElements, ArrayList<Multiple> list)
     {
         this.maxElements = maxElements;
-        this.multiple =  multiple;
+        this.list =  list;
     }
 
     public void setMaxElements(int maxElements)
@@ -22,9 +22,9 @@ public class Buffer
         this.maxElements = maxElements;
     }
 
-    public void setMultiple(ArrayList<Multiple> multiple)
+    public void setList(ArrayList<Multiple> list)
     {
-        this.multiple = multiple;
+        this.list = list;
     }
 
     public int getMaxElements()
@@ -32,22 +32,23 @@ public class Buffer
         return maxElements;
     }
 
-    public ArrayList<Multiple> getMultiple()
+    public ArrayList<Multiple> getList()
     {
-        return multiple;
+        return list;
     }
 
-    public ArrayList<Multiple> multipleAdd(int first, int second, int third)
+    public static ArrayList<Multiple> readMultiple()
     {
-        Multiple multiple1 = new Multiple(first);
-        Multiple multiple2 = new Multiple(second);
-        Multiple multiple3 = new Multiple(third);
+        Multiple multiple1 = new Multiple(2);
+        Multiple multiple2 = new Multiple(4);
+        Multiple multiple3 = new Multiple(8);
         ArrayList<Multiple> multipleArrayList = new ArrayList<Multiple>();
         multipleArrayList.add(multiple1);
         multipleArrayList.add(multiple2);
         multipleArrayList.add(multiple3);
         return multipleArrayList;
     }
+
 
 
 
