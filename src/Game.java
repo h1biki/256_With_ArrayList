@@ -1,23 +1,19 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game
 {
     private String playerName;
     private int gameTotal;
-    private ArrayList<Buffer> multipleList;
+
 
     public Game()
     {
         playerName = "";
         gameTotal = 0;
-        multipleList = new ArrayList<Buffer>();
+
     }
 
-    public void setMultipleList(ArrayList<Buffer> multipleList)
-    {
-        this.multipleList = multipleList;
-    }
+
 
     public void setGameTotal(int gameTotal)
     {
@@ -39,10 +35,7 @@ public class Game
         return playerName;
     }
 
-    public ArrayList<Buffer> getMultipleList()
-    {
-        return multipleList;
-    }
+
 
     public String nameAssign()
     {
@@ -67,11 +60,9 @@ public class Game
      */
     public void startGame()
     {
-        Game game = new Game();
-        Buffer buffer = new Buffer();
         boolean isPlayerRegistered = false;//flag of whether human player's name has assigned
         String option = "";//select option from the main menu
-        while (!option.equals("3"))//this loop keeps game running until player pressed 2
+        while (!option.equals("4"))//this loop keeps game running until player pressed 2
         {
             displayMenu();
             System.out.println("Please Choose Your Option:");
@@ -80,12 +71,31 @@ public class Game
             switch (option)
             {
                 case "1":
-                    game.setPlayerName(nameAssign());
+                    setPlayerName(nameAssign());
                     isPlayerRegistered = true;//after name assignment then set flag to true
                     break;
                 case "2":
                     if (isPlayerRegistered)//check flag
                     {
+                        Buffer leftBuffer = new Buffer();
+                        Buffer rightBuffer = new Buffer();
+                        Buffer multipleBuffer = new Buffer();
+                        leftBuffer.setMaxElements(5);
+                        rightBuffer.setMaxElements(3);
+                        multipleBuffer.setMaxElements(3);
+                        multipleBuffer.setMultiple(multipleBuffer.multipleAdd(2, 4, 8));
+                        RNG rng = new RNG(0, 2);
+                        int index = rng.generateNumber();
+                        setGameTotal(multipleBuffer.getMultiple().get(index).getValue());
+
+
+
+
+
+
+
+
+
 
                     } else
                     {
@@ -104,6 +114,8 @@ public class Game
             }
         }
     }
+
+
 
     /**
      * To display the main menu

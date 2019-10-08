@@ -8,13 +8,13 @@ public class Buffer
     public Buffer()
     {
         maxElements = 0;
-        multiple = new ArrayList<>();
+        multiple = new ArrayList<Multiple>();
     }
 
     public Buffer(int maxElements, ArrayList<Multiple> multiple)
     {
-        this.maxElements = 0;
-        this.multiple = new ArrayList<>();
+        this.maxElements = maxElements;
+        this.multiple =  multiple;
     }
 
     public void setMaxElements(int maxElements)
@@ -36,4 +36,23 @@ public class Buffer
     {
         return multiple;
     }
+
+    public ArrayList<Multiple> multipleAdd(int first, int second, int third)
+    {
+        Multiple multiple1 = new Multiple(first);
+        Multiple multiple2 = new Multiple(second);
+        Multiple multiple3 = new Multiple(third);
+        ArrayList<Multiple> multipleArrayList = new ArrayList<Multiple>();
+        multipleArrayList.add(multiple1);
+        multipleArrayList.add(multiple2);
+        multipleArrayList.add(multiple3);
+        return multipleArrayList;
+    }
+
+
+
+
+
+
+
 }
