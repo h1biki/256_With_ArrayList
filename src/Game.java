@@ -97,12 +97,14 @@ public class Game
 
 
 
+
                     } else
                     {
                         System.out.println("Please Assign Your Name Before Playing...");//if player not registered then ask to input name
                     }
                     break;
                 case "3":
+
                     help();//display help menu
                     break;
                 case "4":
@@ -129,9 +131,10 @@ public class Game
         System.out.println("*  Welcome To The 256-With-ArrayList Game! *");
         System.out.println("*                                          *");
         System.out.println("* Please select from the following options *");
-        System.out.println("*       Press 1 to start a new game        *");
-        System.out.println("*     Press 2 to display the help menu     *");
-        System.out.println("*             Press 3 to exit              *");
+        System.out.println("*       Press 1 to assign a player         *");
+        System.out.println("*        Press 2 to start the game         *");
+        System.out.println("*     Press 3 to display the help menu     *");
+        System.out.println("*             Press 4 to exit              *");
         System.out.println("============================================");
         System.out.println("");
     }
