@@ -37,17 +37,7 @@ public class Buffer
         return list;
     }
 
-    public static ArrayList<Multiple> readMultiple()
-    {
-        Multiple multiple1 = new Multiple(2);
-        Multiple multiple2 = new Multiple(4);
-        Multiple multiple3 = new Multiple(8);
-        ArrayList<Multiple> multipleArrayList = new ArrayList<Multiple>();
-        multipleArrayList.add(multiple1);
-        multipleArrayList.add(multiple2);
-        multipleArrayList.add(multiple3);
-        return multipleArrayList;
-    }
+
 
 
 

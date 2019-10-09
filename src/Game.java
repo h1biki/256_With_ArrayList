@@ -1,4 +1,4 @@
-//file IO WIP, multipleList selection WIP, hard level selection WIP, Help() WIP
+//mod - file IO WIP, multipleList selection WIP, hard level selection WIP, Help() WIP, mod - Input WIP, mod - Validation WIP
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -90,25 +90,31 @@ public class Game
                         Buffer rightBuffer = new Buffer();
                         leftBuffer.setMaxElements(5);
                         rightBuffer.setMaxElements(3);
+                        FileIO ioRead = new FileIO("multiples.txt");
+                        multipleList = ioRead.contentSetProcess(ioRead.readFile(ioRead.getFileName()));
                         RNG rng = new RNG(0, 2);
                         int index = rng.generateNumber();
+                        Scanner choose = new Scanner(System.in);
+                        String chooseMultipleSet = choose.nextLine().trim();
+                        do
+                        {
+                            switch (chooseMultipleSet)
+                            {
+                                case "1":
+                                    setGameTotal(multipleList.get(0).getList().get(index).getValue());
+                                    break;
+                                case "2":
+                                    setGameTotal(multipleList.get(1).getList().get(index).getValue());
+                                    break;
+                                case "3":
+                                    setGameTotal(multipleList.get(2).getList().get(index).getValue());
+                                    break;
+                                default:
+                                    System.out.println("Please input a valid option!");
+                                    break;
+                            }
 
-
-
-
-
-
-
-
-                        setGameTotal(multipleList.get(0).getList().get(index).getValue());
-
-
-
-
-
-
-
-
+                        } while(!chooseMultipleSet.equals("1") || !chooseMultipleSet.equals("2") || !chooseMultipleSet.equals("3"));
                         do
                         {
                             displayNow(leftBuffer.getList(), gameTotal, rightBuffer.getList());
@@ -205,10 +211,9 @@ public class Game
     {
         int userGameTotal = 0;
         Scanner s = new Scanner(System.in);
-        s.nextInt();
-        s.nextLine();
         System.out.println("Please set the game total you want reach: ");
         userGameTotal = s.nextInt();
+        s.nextLine();
         return userGameTotal;
     }
 
@@ -277,12 +282,19 @@ public class Game
         }
         if(!sizeOK)
         {
-            System.out.println("Sorry! " + getPlayerName() + " Lose!");
+            FileIO ioWrite = new FileIO("output.txt");
+            ioWrite.writeFile(ioWrite.getFileName(), "Congratulations! " + getPlayerName() + " Win!");
         }
         if (sizeOK && tempGameTotal == tempWinTotal)
         {
-            System.out.println("Congratulations! " + getPlayerName() + " Win!");
+            FileIO ioWrite = new FileIO("output.txt");
+            ioWrite.writeFile(ioWrite.getFileName(), "Sorry, " + getPlayerName() + " Lose...");
         }
     }
+
+
+
+
+
 }
 
