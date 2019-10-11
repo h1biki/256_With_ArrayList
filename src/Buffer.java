@@ -17,6 +17,11 @@ public class Buffer
         this.list =  list;
     }
 
+    public void addMultiple(int mulValue)
+    {
+        list.add(new Multiple(mulValue));
+    }
+
     public void setMaxElements(int maxElements)
     {
         this.maxElements = maxElements;
@@ -36,14 +41,4 @@ public class Buffer
     {
         return list;
     }
-
-
-
-
-
-
-
-
-
-
 }
