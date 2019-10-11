@@ -340,7 +340,8 @@ public class Game
         if(tempLeftArray.size() <  tempLeftBuffer.getMaxElements() && tempRightArray.size() <  tempRightBuffer.getMaxElements())
         {
             sizeOK = true;
-        } else
+        }
+        else
         {
             sizeOK = false;
         }
