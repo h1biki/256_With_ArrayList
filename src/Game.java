@@ -250,7 +250,6 @@ public class Game
         {
             for (int i = 0; i < tempLeftBuffer.size(); i++)
             {
-                System.out.printf("gt: %d, buf: %d", gameTotal, tempLeftBuffer.get(i).getValue());
                 if (gameTotal == tempLeftBuffer.get(i).getValue())
                 {
                     gameTotal = gameTotal * 2;
@@ -345,13 +344,17 @@ public class Game
         {
             sizeOK = false;
         }
-        if(!sizeOK)
+        if(gameTotal == tempWinTotal)
         {
+            System.out.println("Congratulations! " + getPlayerName() + " Win!");
+            System.out.println("Result saved to output.txt");
             FileIO ioWrite = new FileIO("output.txt");
             ioWrite.writeFile(ioWrite.getFileName(), "Congratulations! " + getPlayerName() + " Win!");
         }
-        else if (sizeOK && tempGameTotal == tempWinTotal)
+        else if (!sizeOK && !checkMergeAvailability(tempLeftBuffer.getList()) && !checkMergeAvailability(tempRightBuffer.getList()))
         {
+            System.out.println("Sorry, " + getPlayerName() + " Lose...");
+            System.out.println("Result saved to output.txt");
             FileIO ioWrite = new FileIO("output.txt");
             ioWrite.writeFile(ioWrite.getFileName(), "Sorry, " + getPlayerName() + " Lose...");
         }
