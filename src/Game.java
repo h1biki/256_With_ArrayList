@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Game
 {
@@ -46,17 +45,18 @@ public class Game
 
     public String nameAssign()
     {
-        System.out.println("Please Input Your Name: ");
-        Scanner scanner = new Scanner(System.in);
-        String userName = scanner.nextLine().trim();
-        while (userName.length() > 10 || userName.length() < 3)
+        Input input = new Input();
+        Validation validation = new Validation();
+        String userName = input.acceptStringInput("Please Input Your Name: ");
+        //while (userName.length() > 10 || userName.length() < 3)
+        while (validation.stringIsBlank(userName) || !validation.stringLengthWithinRange(userName, 3, 10))
         {
             System.out.println("The player's name should contains more than 3 letters and less than 10 letters.");
-            System.out.println("Please re-input the name: ");
-            userName = scanner.nextLine().trim();
+            userName = input.acceptStringInput("Please re-Input Your Name: ");
         }
         System.out.println("Gamer name assignment progress successfully finished.");
-        System.out.println("Game will start shortly...");
+        System.out.println("Now you can choose to start game.");
+        System.out.println("If not satisfied with the name you just typed, simply choose option 1 again to assign a new name!");
         return userName;
     }
 
@@ -68,13 +68,12 @@ public class Game
     public void startGame()
     {
         boolean isPlayerRegistered = false;//flag of whether human player's name has assigned
+        Input input = new Input();
         String option = "";//select option from the main menu
         while (!option.equals("4"))//this loop keeps game running until player pressed 2
         {
             displayMenu();
-            System.out.println("Please Choose Your Option: ");
-            Scanner scanner = new Scanner(System.in);
-            option = scanner.nextLine().trim();//receiving option from the player
+            option = input.acceptStringInput("Please Choose Your Option: ");//receiving option from the player
             switch (option)
             {
                 case "1":
@@ -108,9 +107,7 @@ public class Game
                             }
                             System.out.println();
                         }
-                        System.out.println("Please choose a Multiple set: ");
-                        Scanner choose = new Scanner(System.in);
-                        String chooseMultipleSet = choose.nextLine().trim();
+                        String chooseMultipleSet = input.acceptStringInput("Please choose a Multiple set: ");
                         Buffer tempMultiple = new Buffer();
                         boolean proceed = true;
                         do
@@ -149,8 +146,7 @@ public class Game
                             }
                             displayNow(leftBuffer, gameTotal, rightBuffer);
                             actionDisplay();
-                            Scanner s = new Scanner(System.in);
-                            String choice = s.nextLine().trim();//receiving option from the player
+                            String choice = input.acceptStringInput("Please choose an option: ");
                             switch (choice)
                             {
                                 case "1":
@@ -238,10 +234,8 @@ public class Game
     public int gameWinTotalAssign()
     {
         int userGameTotal = 0;
-        Scanner s = new Scanner(System.in);
-        System.out.println("Please set the game total you want reach: ");
-        userGameTotal = s.nextInt();
-        s.nextLine();
+        Input input = new Input();
+        userGameTotal = input.acceptIntegerInput("Please set the game total you want reach: ");
         return userGameTotal;
     }
 
@@ -345,7 +339,7 @@ public class Game
         {
             sizeOK = false;
         }
-        if(gameTotal == tempWinTotal)
+        if(gameTotal >= tempWinTotal)
         {
             System.out.println("Congratulations! " + getPlayerName() + " Win!");
             System.out.println("Result saved to output.txt");
