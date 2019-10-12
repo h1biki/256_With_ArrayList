@@ -85,7 +85,7 @@ public class Game
                     if (isPlayerRegistered)//check flag
                     {
                         int gameWinTotal = gameWinTotalAssign();
-                        while (gameWinTotal < 32 || gameWinTotal % 8 != 0)
+                        while (gameWinTotal <= 32 || gameWinTotal % 8 != 0)
                         {
                             System.out.println("The goal of game total should greater than 32 and is the multiple of 8");
                             System.out.println("Please input again.");
@@ -101,9 +101,10 @@ public class Game
                         int bufferNo = 0;
                         for (Buffer each : multipleList)
                         {
-                            System.out.println("Buffer: " + ++bufferNo);
-                            for ( Multiple mul : each.getList()) {
-                                System.out.print(mul.getValue() + " ");
+                            System.out.println("Multiple set " + ++bufferNo + ": ");
+                            for(int i = 0; i<each.getList().size(); i++)
+                            {
+                                System.out.print(each.getList().get(i).getValue() + " ");
                             }
                             System.out.println();
                         }
@@ -146,17 +147,17 @@ public class Game
                                 int index = rng.generateNumber();
                                 gameTotal = tempMultiple.getList().get(index).getValue();
                             }
-                            displayNow(leftBuffer.getList(), gameTotal, rightBuffer.getList());
+                            displayNow(leftBuffer, gameTotal, rightBuffer);
                             actionDisplay();
                             Scanner s = new Scanner(System.in);
                             String choice = s.nextLine().trim();//receiving option from the player
                             switch (choice)
                             {
                                 case "1":
-                                    mergeLeft(leftBuffer.getList());
+                                    mergeLeft(leftBuffer);
                                     break;
                                 case "2":
-                                    mergeRight(rightBuffer.getList());
+                                    mergeRight(rightBuffer);
                                     break;
                                 case "3":
                                     splitLeft(leftBuffer, gameTotal);
@@ -169,7 +170,7 @@ public class Game
                                     break;
                             }
                         }while(gameTotal < gameWinTotal);
-                        judgeWin(leftBuffer, rightBuffer, leftBuffer.getList(), rightBuffer.getList(), gameTotal, gameWinTotal);
+                        judgeWin(leftBuffer, rightBuffer, gameWinTotal);
                         isPlayerRegistered = false;//flag set to false, in order to start a fresh new game
                     } else
                     {
@@ -244,16 +245,16 @@ public class Game
         return userGameTotal;
     }
 
-    public void mergeLeft (ArrayList<Multiple> tempLeftBuffer)
+    public void mergeLeft (Buffer tempLeftBuffer)
     {
         if(checkMergeAvailability(tempLeftBuffer))
         {
-            for (int i = 0; i < tempLeftBuffer.size(); i++)
+            for (int i = 0; i < tempLeftBuffer.getList().size(); i++)
             {
-                if (gameTotal == tempLeftBuffer.get(i).getValue())
+                if (gameTotal == tempLeftBuffer.getList().get(i).getValue())
                 {
                     gameTotal = gameTotal * 2;
-                    tempLeftBuffer.remove(i);
+                    tempLeftBuffer.getList().remove(i);
                     break;
                 }
             }
@@ -265,16 +266,16 @@ public class Game
         }
     }
 
-    public void mergeRight (ArrayList<Multiple> tempRightBuffer)
+    public void mergeRight (Buffer tempRightBuffer)
     {
         if(checkMergeAvailability(tempRightBuffer))
         {
-            for (int i = 0; i < tempRightBuffer.size(); i++)
+            for (int i = 0; i < tempRightBuffer.getList().size(); i++)
             {
-                if (gameTotal == tempRightBuffer.get(i).getValue())
+                if (gameTotal == tempRightBuffer.getList().get(i).getValue())
                 {
                     gameTotal = gameTotal * 2;
-                    tempRightBuffer.remove(i);
+                    tempRightBuffer.getList().remove(i);
                     break;
                 }
             }
@@ -311,14 +312,14 @@ public class Game
         }
     }
 
-    public void displayNow(ArrayList<Multiple> tempLeftBuffer, int readGameTotal, ArrayList<Multiple> tempRightBuffer)
+    public void displayNow(Buffer tempLeftBuffer, int readGameTotal, Buffer tempRightBuffer)
     {
         // left buffer
         System.out.println("");
         System.out.print("LEFT BUFFER: { ");
-        for(Multiple s : tempLeftBuffer)
+        for(int i = 0; i < tempLeftBuffer.getList().size(); i++)
         {
-            System.out.print(s.getValue() + " ");
+            System.out.print(tempLeftBuffer.getList().get(i).getValue() + " ");
         }
         System.out.print("}\n");
         System.out.println("");
@@ -326,17 +327,17 @@ public class Game
         System.out.println("GAME TOTAL: " + readGameTotal + "\n");
         // right buffer
         System.out.print("RIGHT BUFFER: { ");
-        for(Multiple s : tempRightBuffer)
+        for(int i = 0; i < tempRightBuffer.getList().size(); i++)
         {
-            System.out.print(s.getValue() + " ");
+            System.out.print(tempRightBuffer.getList().get(i).getValue() + " ");
         }
         System.out.print("}\n");
     }
 
-    public void judgeWin(Buffer tempLeftBuffer, Buffer tempRightBuffer, ArrayList<Multiple> tempLeftArray, ArrayList<Multiple> tempRightArray, int tempGameTotal, int tempWinTotal)
+    public void judgeWin(Buffer tempLeftBuffer, Buffer tempRightBuffer, int tempWinTotal)
     {
         boolean sizeOK = false;
-        if(tempLeftArray.size() <  tempLeftBuffer.getMaxElements() && tempRightArray.size() <  tempRightBuffer.getMaxElements())
+        if(tempLeftBuffer.getList().size() <  tempLeftBuffer.getMaxElements() && tempRightBuffer.getList().size() <  tempRightBuffer.getMaxElements())
         {
             sizeOK = true;
         }
@@ -351,7 +352,7 @@ public class Game
             FileIO ioWrite = new FileIO("output.txt");
             ioWrite.writeFile(ioWrite.getFileName(), "Congratulations! " + getPlayerName() + " Win!");
         }
-        else if (!sizeOK && !checkMergeAvailability(tempLeftBuffer.getList()) && !checkMergeAvailability(tempRightBuffer.getList()))
+        else if (!sizeOK && !checkMergeAvailability(tempLeftBuffer) && !checkMergeAvailability(tempRightBuffer))
         {
             System.out.println("Sorry, " + getPlayerName() + " Lose...");
             System.out.println("Result saved to output.txt");
@@ -361,12 +362,12 @@ public class Game
     }
 
 
-    public boolean checkMergeAvailability(ArrayList<Multiple> tempMultiple)
+    public boolean checkMergeAvailability(Buffer tempMultiple)
     {
         boolean status = false;
-        for (Multiple each : tempMultiple)
+        for(int i = 0; i < tempMultiple.getList().size(); i++)
         {
-            if(each.getValue() == gameTotal)
+            if(tempMultiple.getList().get(i).getValue() == gameTotal)
             {
                 status = true;
                 break;
