@@ -92,8 +92,6 @@ public class Game
                         }
                         Buffer leftBuffer = new Buffer();
                         Buffer rightBuffer = new Buffer();
-                        leftBuffer.setMaxElements(5);
-                        rightBuffer.setMaxElements(3);
                         System.out.println("Reading external file...");
                         FileIO ioRead = new FileIO("multiples.txt");
                         multipleList = ioRead.contentSetProcess(ioRead.readFile(ioRead.getFileName()));
@@ -136,7 +134,32 @@ public class Game
                             }
                         }
                         while(!proceed);
-
+                        displayLevel();
+                        String chooseLevel = input.acceptStringInput("Please select the game hard level: ");
+                        boolean levelFlag = true;
+                        do
+                        {
+                            switch (chooseLevel)
+                            {
+                                case "1":
+                                   leftBuffer.setMaxElements(7);
+                                   rightBuffer.setMaxElements(5);
+                                    break;
+                                case "2":
+                                    leftBuffer.setMaxElements(5);
+                                    rightBuffer.setMaxElements(3);
+                                    break;
+                                case "3":
+                                    leftBuffer.setMaxElements(4);
+                                    rightBuffer.setMaxElements(2);
+                                    break;
+                                default:
+                                    System.out.println("Please select a valid game level!");
+                                    levelFlag = false;
+                                    break;
+                            }
+                        }
+                        while(!levelFlag);
                         do
                         {
                             RNG rng = new RNG(0, 2);
@@ -229,6 +252,14 @@ public class Game
 
         System.out.println("===================================================================");
         System.out.println("");
+    }
+
+    public void displayLevel()
+    {
+        System.out.println("HARD LEVEL SELECTION: ");
+        System.out.println("1. Easy (Left Buffer size 7, Right Buffer size 5)");
+        System.out.println("2. Normal (Left Buffer size 5, Right Buffer size 3)");
+        System.out.println("3. Hard (Left Buffer size 4, Right Buffer size 2)");
     }
 
     public int gameWinTotalAssign()
