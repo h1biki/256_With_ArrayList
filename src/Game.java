@@ -245,11 +245,33 @@ public class Game
     public void help()//menu 3, help menu
     {
         System.out.println("");
-        System.out.println("-----------------------------HELP MENU-----------------------------");
-        System.out.println("===================================================================");
-
-
-
+        System.out.println("=============================HELP MENU=============================");
+        System.out.println("");
+        System.out.println("The game sequence is as follows:\n" +
+                "1. The game starts by registering a player to play the game.\n" +
+                "2. The player is prompted to enter the game total upto which the game will be played. The game total must be greater than 32 and a multiple of 8.\n" +
+                "3. The player is then prompted to select from the possible list of multiple with which to play the game. (These have been read from the file).\n" +
+                "4. Both the Arraylist buffers (b1 and b2) are empty.\n" +
+                "5. The game then provides a random multiple to the player which is stored in the game total.\n" +
+                "6. The player can then perform the following actions:\n" +
+                "=> Split Right (->)\n" +
+                "This allows the player to add the game total (t) number to the right arraylist " +
+                "buffer (b2)\n" +
+                "A new random multiple is then generated and put in the game total (t)\n" +
+                "=> Merge Right (->>)\n" +
+                "This allows the player to merge the number in the game total box with a matching number in any position in the right arraylist buffer. \nThe total is then put in the game total box and the number is removed from the arraylist.\n" +
+                "After the total is added, the game total (t) now shows the new number. \nNo new random number is generated and the game goes back to point 6 above to allow the player to continue.\n" +
+                "=> Split Left (<-)\n" +
+                "This allows the player to add the game total (t) number to the left arraylist buffer (b1)\n A new random multiple is then generated and put in the game total (t)\n" +
+                "=> Merge Left (<<-)\n" +
+                "This allows the player to merge the number in the game total box with a matching number in any position in the left arraylist buffer. \nThe total is then put in the game total box and the number is removed from the arraylist.\n" +
+                "After the total is added, the game total (t) now shows the new number. No new random number is generated and the game goes back to point 6 above to allow the player to continue\nThe game ends when either of the following occur:\n" +
+                "1. The game total (t) reaches the total of whatever the user entered in point 2 above or higher.\n" +
+                "2. The arraylist buffers (b1 and b2) have reached the maximum size limit allowed (depending on the difficulty level)\n and no more numbers can be stored and none of the existing numbers can be merged to the game total (t).\n" +
+                "At the end of the game, the program will write the final outcome to the file “outcome.txt” \nwhich will show the player name and the highest score achieved.\n" +
+                "The following are some of the requirements for the game:\n" +
+                "1. Player name must be between 3 and 10 characters, cannot be blank and cannot contain only spaces.\n" +
+                "2. The arraylist buffers will not allow more elements to be stored beyond the assigned size limit (defined by the difficulty level).\n");
         System.out.println("===================================================================");
         System.out.println("");
     }

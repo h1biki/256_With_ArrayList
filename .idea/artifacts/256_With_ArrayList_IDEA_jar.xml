@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="256_With_ArrayList_IDEA:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/256_With_ArrayList_IDEA_jar</output-path>
+    <root id="archive" name="256_With_ArrayList_IDEA.jar">
+      <element id="module-output" name="256_With_ArrayList_IDEA" />
+    </root>
+  </artifact>
+</component>
