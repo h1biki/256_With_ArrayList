@@ -1,3 +1,6 @@
+import jdk.swing.interop.SwingInterOpUtils;
+
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Game
@@ -402,9 +405,12 @@ public class Game
         if(gameTotal >= tempWinTotal)
         {
             System.out.println("Congratulations! " + getPlayerName() + " Win!");
+            System.out.println("The game total has reached " + gameTotal +
+                    ", which is equal to or more than the target game total." );
             System.out.println("Result saved to output.txt");
             FileIO ioWrite = new FileIO("output.txt");
-            ioWrite.writeFile(ioWrite.getFileName(), "Congratulations! " + getPlayerName() + " Win!");
+            ioWrite.writeFile(ioWrite.getFileName(), "Congratulations! " + getPlayerName() + " Win!\nThe game total has reached " + gameTotal +
+                    ", which is equal to or more than the target game total." );
         }
         else if (!sizeOK && !checkMergeAvailability(tempLeftBuffer) && !checkMergeAvailability(tempRightBuffer))
         {
