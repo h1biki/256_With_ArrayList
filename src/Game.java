@@ -48,7 +48,6 @@ public class Game
         Input input = new Input();
         Validation validation = new Validation();
         String userName = input.acceptStringInput("Please Input Your Name: ");
-        //while (userName.length() > 10 || userName.length() < 3)
         while (validation.stringIsBlank(userName) || !validation.stringLengthWithinRange(userName, 3, 10))
         {
             System.out.println("The player's name should contains more than 3 letters and less than 10 letters.");
@@ -116,20 +115,24 @@ public class Game
                                     tempMultiple.getList().add(0, multipleList.get(0).getList().get(0));
                                     tempMultiple.getList().add(1, multipleList.get(0).getList().get(1));
                                     tempMultiple.getList().add(2, multipleList.get(0).getList().get(2));
+                                    proceed = true;
                                     break;
                                 case "2":
                                     tempMultiple.getList().add(0, multipleList.get(1).getList().get(0));
                                     tempMultiple.getList().add(1, multipleList.get(1).getList().get(1));
                                     tempMultiple.getList().add(2, multipleList.get(1).getList().get(2));
+                                    proceed = true;
                                     break;
                                 case "3":
                                     tempMultiple.getList().add(0, multipleList.get(2).getList().get(0));
                                     tempMultiple.getList().add(1, multipleList.get(2).getList().get(1));
                                     tempMultiple.getList().add(2, multipleList.get(2).getList().get(2));
+                                    proceed = true;
                                     break;
                                 default:
                                     System.out.println("Please input a valid option!");
                                     proceed = false;
+                                    chooseMultipleSet = input.acceptStringInput("Please choose a Multiple set: ");
                                     break;
                             }
                         }
@@ -144,18 +147,22 @@ public class Game
                                 case "1":
                                    leftBuffer.setMaxElements(7);
                                    rightBuffer.setMaxElements(5);
+                                    levelFlag = true;
                                     break;
                                 case "2":
                                     leftBuffer.setMaxElements(5);
                                     rightBuffer.setMaxElements(3);
+                                    levelFlag = true;
                                     break;
                                 case "3":
                                     leftBuffer.setMaxElements(4);
                                     rightBuffer.setMaxElements(2);
+                                    levelFlag = true;
                                     break;
                                 default:
                                     System.out.println("Please select a valid game level!");
                                     levelFlag = false;
+                                    chooseLevel = input.acceptStringInput("Please select the game hard level: ");
                                     break;
                             }
                         }
