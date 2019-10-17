@@ -1,12 +1,11 @@
-//Import libraries here
 import java.util.Scanner;
 
 /**
  * Input Class which creates a scanner object and accept input from the user
  * in different formats
  *
- * @author Zixi Zhao
- * @version 14/8/2019
+ * @author (Zixi Zhao, Student ID: 29977703)
+ * @version (17 Oct 2019)
  */
 public class Input
 {

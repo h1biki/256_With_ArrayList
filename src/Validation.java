@@ -1,9 +1,8 @@
-
 /**
  * Class which performs basic validation for all inputs
  *
- * @author Mark Creado
- * @version 26 Jul 2019
+ * @author Zixi Zhao, Student ID: 29977703
+ * @version 17 Oct 2019
  */
 public class Validation
 {
@@ -16,6 +15,7 @@ public class Validation
 
     /**
      * Method to check if the string is blank
+     * @return boolean
      */
     public boolean stringIsBlank(String value)
     {
@@ -27,6 +27,7 @@ public class Validation
 
     /**
      * Method to check if the string length is between a range
+     * @return boolean
      */
     public boolean stringLengthWithinRange(String value, int min, int max)
     {

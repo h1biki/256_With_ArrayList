@@ -1,11 +1,20 @@
 import java.util.ArrayList;
 
+/**
+ * The core part of the 256-With-arrayList game.
+ *
+ * @author (Zixi Zhao, Student ID: 29977703)
+ * @version (17 Oct 2019)
+ */
 public class Game
 {
     private String playerName;
     private int gameTotal;
     private ArrayList<Buffer> multipleList;
 
+    /**
+     * Default constructor for objects of class Game
+     */
     public Game()
     {
         playerName = "";
@@ -13,36 +22,84 @@ public class Game
         multipleList = new ArrayList<Buffer>();
     }
 
+    /**
+     * Non-default constructor for objects of class Game
+     */
+    public void Game(String playerName, int gameTotal, ArrayList<Buffer> multipleList)
+    {
+        this.playerName = playerName;
+        this.gameTotal = gameTotal;
+        this.multipleList = multipleList;
+    }
+
+    /**
+     * Mutator of gameTotal
+     *
+     * @param  gameTotal  the new value of gameTotal
+     * @return void
+     */
     public void setGameTotal(int gameTotal)
     {
         this.gameTotal = gameTotal;
     }
 
+    /**
+     * Mutator of playerName
+     *
+     * @param  playerName  the new value of playerName
+     * @return void
+     */
     public void setPlayerName(String playerName)
     {
         this.playerName = playerName;
     }
 
+    /**
+     * Mutator of multipleList
+     *
+     * @param  multipleList  the new value of multipleList
+     * @return void
+     */
     public void setMultipleList(ArrayList<Buffer> multipleList)
     {
         this.multipleList = multipleList;
     }
 
+    /**
+     * Accessor of gameTotal
+     *
+     * @return  gameTotal
+     */
     public int getGameTotal()
     {
         return gameTotal;
     }
 
+    /**
+     * Accessor of playerName
+     *
+     * @return  playerName
+     */
     public String getPlayerName()
     {
         return playerName;
     }
 
+    /**
+     * Accessor of multipleList
+     *
+     * @return  multipleList
+     */
     public ArrayList<Buffer> getMultipleList()
     {
         return multipleList;
     }
 
+    /**
+     * To assign a valid name to the player
+     *
+     * @return    the player name
+     */
     public String nameAssign()
     {
         Input input = new Input();
@@ -216,6 +273,11 @@ public class Game
         }
     }
 
+    /**
+     * To display the action menu
+     *
+     * @return void
+     */
     private void actionDisplay()
     {
         System.out.println("Press 1 to merge left.<<-");
@@ -283,6 +345,11 @@ public class Game
         System.out.println("");
     }
 
+    /**
+     * To display the level selection menu
+     *
+     * @return void
+     */
     public void displayLevel()
     {
         System.out.println("HARD LEVEL SELECTION: ");
@@ -291,6 +358,11 @@ public class Game
         System.out.println("3. Hard (Left Buffer size 4, Right Buffer size 2)");
     }
 
+    /**
+     * To assign the desired target gameTotal which the player want reach
+     *
+     * @return the desired target gameTotal
+     */
     public int gameWinTotalAssign()
     {
         int userGameTotal = 0;
@@ -299,6 +371,12 @@ public class Game
         return userGameTotal;
     }
 
+    /**
+     * the action of merge left
+     *
+     * @param tempLeftBuffer the buffer which is currently interacting
+     * @return void
+     */
     public void mergeLeft (Buffer tempLeftBuffer)
     {
         if(checkMergeAvailability(tempLeftBuffer))
@@ -320,6 +398,12 @@ public class Game
         }
     }
 
+    /**
+     * the action of merge right
+     *
+     * @param tempRightBuffer the buffer which is currently interacting
+     * @return void
+     */
     public void mergeRight (Buffer tempRightBuffer)
     {
         if(checkMergeAvailability(tempRightBuffer))
@@ -340,6 +424,13 @@ public class Game
         }
     }
 
+    /**
+     * the action of split left
+     *
+     * @param tempLeftBuffer the buffer which is currently interacting
+     * @param tempGameTotal the current gameTotal
+     * @return void
+     */
     public void splitLeft (Buffer tempLeftBuffer, int tempGameTotal)
     {
         if (checkSplitAvailability(tempLeftBuffer))
@@ -353,6 +444,13 @@ public class Game
         }
     }
 
+    /**
+     * the action of split right
+     *
+     * @param tempRightBuffer the buffer which is currently interacting
+     * @param tempGameTotal the current gameTotal
+     * @return void
+     */
     public void splitRight (Buffer tempRightBuffer, int tempGameTotal)
     {
         if (checkSplitAvailability(tempRightBuffer))
@@ -366,6 +464,14 @@ public class Game
         }
     }
 
+    /**
+     * to display the current game status, include both side buffers and the game total value
+     *
+     * @param tempLeftBuffer the buffer which is currently interacting
+     * @param tempRightBuffer the buffer which is currently interacting
+     * @param readGameTotal the current gameTotal
+     * @return void
+     */
     public void displayNow(Buffer tempLeftBuffer, int readGameTotal, Buffer tempRightBuffer)
     {
         // left buffer
@@ -388,6 +494,14 @@ public class Game
         System.out.print("}\n");
     }
 
+    /**
+     * to judge the win
+     *
+     * @param tempLeftBuffer the buffer which is currently interacting
+     * @param tempRightBuffer the buffer which is currently interacting
+     * @param tempWinTotal the target gameTotal the player want to reach
+     * @return void
+     */
     public void judgeWin(Buffer tempLeftBuffer, Buffer tempRightBuffer, int tempWinTotal)
     {
         boolean sizeOK = false;
@@ -419,6 +533,12 @@ public class Game
     }
 
 
+    /**
+     * to check whether the buffer can be merge
+     *
+     * @param tempMultiple the buffer which is currently interacting
+     * @return boolean
+     */
     public boolean checkMergeAvailability(Buffer tempMultiple)
     {
         boolean status = false;
@@ -433,6 +553,12 @@ public class Game
         return status;
     }
 
+    /**
+     * to check whether the buffer can be split to
+     *
+     * @param tempBuffer the buffer which is currently interacting
+     * @return boolean
+     */
     public boolean checkSplitAvailability(Buffer tempBuffer)
     {
         boolean status;

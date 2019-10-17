@@ -1,11 +1,11 @@
 import java.util.Random;
-/**
- * class RNG is the random number generator
- *
- * @author (Zixi Zhao)
- * @version (14-9-2019)
- */
 
+/**
+ * The random number generator part of the 256-With-arrayList game.
+ *
+ * @author (Zixi Zhao, Student ID: 29977703)
+ * @version (17 Oct 2019)
+ */
 public class RNG
 {
     private int maximumValue;//the maximum bound of generate number
@@ -30,7 +30,7 @@ public class RNG
     }
 
     /**
-     * To genarate an integer random number, inclusive range from minimumValue to maximumValue
+     * To generate an integer random number, inclusive range from minimumValue to maximumValue
      *
      * @return    an integer random number
      */
@@ -75,7 +75,7 @@ public class RNG
     /**
      * Mutator of minimumValue
      *
-     * @param  int newMinimumValue  the new value of minimumValue
+     * @param  newMinimumValue  the new value of minimumValue
      * @return    void
      */
     public void setMinimumValue(int newMinimumValue)
