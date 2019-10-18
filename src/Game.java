@@ -371,7 +371,7 @@ public class Game
         do
         {
             userGameTotal = input.acceptStringInput("Please set the game total you want reach: ");
-            if (isNumeric(userGameTotal))
+            if (isNumeric(userGameTotal) && userGameTotal.length() > 0)
             {
                 intUserGameTotal = Integer.parseInt(userGameTotal);
             }
@@ -390,7 +390,7 @@ public class Game
      */
     public static boolean isNumeric(String str)
     {
-        for(int i=str.length(); --i >= 0;)
+        for(int i = 0; i < str.length(); i++)
         {
             int chr = str.charAt(i);
             if(chr<48 || chr>57)
