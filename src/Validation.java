@@ -36,4 +36,22 @@ public class Validation
             withinRange = true;
         return withinRange;
     }
+
+    /**
+     * To check the input is a number
+     *
+     * @return boolean
+     */
+    public static boolean isNumeric(String str)
+    {
+        for(int i = 0; i < str.length(); i++)
+        {
+            int chr = str.charAt(i);
+            if(chr<48 || chr>57)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }

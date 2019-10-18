@@ -368,37 +368,20 @@ public class Game
         String userGameTotal = "";
         int intUserGameTotal = 0;
         Input input = new Input();
+        Validation validation = new Validation();
         do
         {
             userGameTotal = input.acceptStringInput("Please set the game total you want reach: ");
-            if (isNumeric(userGameTotal) && userGameTotal.length() > 0)
+            if (validation.isNumeric(userGameTotal) && userGameTotal.length() > 0)
             {
                 intUserGameTotal = Integer.parseInt(userGameTotal);
             }
-            else if (!isNumeric(userGameTotal))
+            else if (!validation.isNumeric(userGameTotal))
             {
                 System.out.println("Please a valid number! ");
             }
-        } while (!isNumeric(userGameTotal));
+        } while (!validation.isNumeric(userGameTotal));
         return intUserGameTotal;
-    }
-
-    /**
-     * To check the input is a number
-     *
-     * @return boolean
-     */
-    public static boolean isNumeric(String str)
-    {
-        for(int i = 0; i < str.length(); i++)
-        {
-            int chr = str.charAt(i);
-            if(chr<48 || chr>57)
-            {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
