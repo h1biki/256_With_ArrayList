@@ -365,10 +365,35 @@ public class Game
      */
     public int gameWinTotalAssign()
     {
-        int userGameTotal = 0;
+        String userGameTotal = "";
+        int intUserGameTotal = 0;
         Input input = new Input();
-        userGameTotal = input.acceptIntegerInput("Please set the game total you want reach: ");
-        return userGameTotal;
+        do
+        {
+            userGameTotal = input.acceptStringInput("Please set the game total you want reach: ");
+            if (isNumeric(userGameTotal))
+            {
+                intUserGameTotal = Integer.parseInt(userGameTotal);
+            }
+            else if (!isNumeric(userGameTotal))
+            {
+                System.out.println("Please a valid number! ");
+            }
+        } while (!isNumeric(userGameTotal));
+        return intUserGameTotal;
+    }
+
+    public static boolean isNumeric(String str)
+    {
+        for(int i=str.length();--i>=0;)
+        {
+            int chr = str.charAt(i);
+            if(chr<48 || chr>57)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
