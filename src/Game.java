@@ -390,7 +390,7 @@ public class Game
      */
     public static boolean isNumeric(String str)
     {
-        for(int i=str.length();--i>=0;)
+        for(int i=str.length(); --i >= 0;)
         {
             int chr = str.charAt(i);
             if(chr<48 || chr>57)
