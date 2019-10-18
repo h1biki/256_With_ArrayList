@@ -383,6 +383,11 @@ public class Game
         return intUserGameTotal;
     }
 
+    /**
+     * To check the input is a number
+     *
+     * @return boolean
+     */
     public static boolean isNumeric(String str)
     {
         for(int i=str.length();--i>=0;)
