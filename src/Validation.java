@@ -54,4 +54,23 @@ public class Validation
         }
         return true;
     }
+
+    /**
+     * To check the input whether contains a blank
+     *
+     * @return boolean
+     */
+
+    public boolean hasBlank(String str)
+    {
+        if (str.contains(" "))
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+
+
 }

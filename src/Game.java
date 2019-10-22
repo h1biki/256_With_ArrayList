@@ -105,9 +105,9 @@ public class Game
         Input input = new Input();
         Validation validation = new Validation();
         String userName = input.acceptStringInput("Please Input Your Name: ");
-        while (validation.stringIsBlank(userName) || !validation.stringLengthWithinRange(userName, 3, 10))
+        while (validation.stringIsBlank(userName) || !validation.stringLengthWithinRange(userName, 3, 10) || validation.hasBlank(userName))
         {
-            System.out.println("The player's name should contains more than 3 letters and less than 10 letters.");
+            System.out.println("The player's name should contains more than 3 letters and less than 10 letters, and cannot contains blank");
             userName = input.acceptStringInput("Please re-Input Your Name: ");
         }
         System.out.println("Gamer name assignment progress successfully finished.");
