@@ -94,14 +94,14 @@ public class FileIO
                     Scanner parser = new Scanner(inputFile);
                     while (parser.hasNextLine())
                     {
-                               contentSet += parser.nextLine();
-                               contentSet += "\n";
+                        contentSet += parser.nextLine();
+                        contentSet += "\n";
                     }
                 }
                 finally
                 {
-                        System.out.println("Reading finished... Now closing file");
-                        inputFile.close();
+                    System.out.println("Reading finished... Now closing file");
+                    inputFile.close();
                 }
             }
             catch (FileNotFoundException exception)

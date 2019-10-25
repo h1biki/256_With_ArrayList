@@ -202,8 +202,8 @@ public class Game
                             switch (chooseLevel)
                             {
                                 case "1":
-                                   leftBuffer.setMaxElements(7);
-                                   rightBuffer.setMaxElements(5);
+                                    leftBuffer.setMaxElements(7);
+                                    rightBuffer.setMaxElements(5);
                                     levelFlag = true;
                                     break;
                                 case "2":
@@ -544,7 +544,6 @@ public class Game
             ioWrite.writeFile(ioWrite.getFileName(), "Sorry, " + getPlayerName() + " Lose...");
         }
     }
-
 
     /**
      * to check whether the buffer can be merge
